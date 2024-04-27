@@ -89,7 +89,7 @@ function Signin() {
             className="w-full bg-white text-black p-3 rounded-2xl font-semibold text-xl disabled:opacity-60"
             disabled={loading}
           >
-            {loading ? "loggiing in" : "Login"}
+            {loading ? "signing you in" : "Login"}
           </button>
           {error && (
             <span className="text-[#d80000d0] font-semibold text-center">
