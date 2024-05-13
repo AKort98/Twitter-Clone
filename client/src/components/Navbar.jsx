@@ -1,11 +1,9 @@
 import React from "react";
-import { BiBell, BiEnvelope, BiHome, BiSearch, BiSend } from "react-icons/bi";
-import { BsMailbox, BsMailbox2Flag } from "react-icons/bs";
-import { MdMail } from "react-icons/md";
+import { BiBell, BiEnvelope, BiHome, BiSearch } from "react-icons/bi";
 
 function Navbar() {
   return (
-    <div className="text-white fixed bottom-0 flex border-t-[1px] border-t-slate-800 w-full justify-around p-3 bg-black">
+    <div className="text-white fixed bottom-0 flex border-t-[1px] border-t-slate-800 w-full justify-around p-3 bg-black sm:hidden">
       <span>
         <BiHome className="size-7" />
       </span>

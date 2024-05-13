@@ -5,18 +5,22 @@ import CreateAccount from "./components/CreateAccount";
 import Signin from "./components/Signin";
 import Feed from "./pages/Feed";
 import PostDetails from "./pages/PostDetails";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
+  const queryClient = new QueryClient();
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/sign-up" element={<CreateAccount />} />
-        <Route path="/sign-in" element={<Signin />} />
-        <Route path="/home" element={<Feed />} />
-        <Route path="/post/:id" element={<PostDetails />} />
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sign-up" element={<CreateAccount />} />
+          <Route path="/sign-in" element={<Signin />} />
+          <Route path="/home" element={<Feed />} />
+          <Route path="/post/:id" element={<PostDetails />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

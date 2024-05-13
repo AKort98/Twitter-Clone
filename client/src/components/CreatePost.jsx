@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { BiPoll } from "react-icons/bi";
 import { FaUpload } from "react-icons/fa";
 import { GiFactory } from "react-icons/gi";
+import { useQueryClient } from "@tanstack/react-query";
 
 function CreatePost() {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const queryClient = useQueryClient();
 
   const handlePost = async () => {
     setLoading(true);
@@ -31,6 +33,7 @@ function CreatePost() {
     setLoading(false);
     setText("");
     console.log(data);
+    queryClient.invalidateQueries("posts");
   };
 
   return (

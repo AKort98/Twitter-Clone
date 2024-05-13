@@ -5,6 +5,7 @@ import { currentUserAtom } from "../../jotaiLib/lib";
 import { useNavigate } from "react-router-dom";
 import OAuth from "./OAuth";
 import Apple from "./Apple";
+import LogoX from "./LogoX";
 function Signin() {
   const setCurrentUser = useSetAtom(currentUserAtom);
 
@@ -54,7 +55,12 @@ function Signin() {
   return (
     <div className="flex justify-center align-middle sm:items-center h-lvh w-full">
       <div className="sm:size-[520px] sm:rounded-lg sm:border-gray-500 sm:border flex flex-col gap-4 p-10 sm:px-24 sm:py-10">
-        <h1 className="text-gray-200 text-4xl font-semibold">Sign in to X</h1>
+        <h1 className="text-gray-200 text-4xl font-semibold flex gap-2 items-center">
+          <span>Sign in to</span>
+          <span className="size-8">
+            <LogoX />
+          </span>
+        </h1>
         <div className="flex flex-col gap-4">
           <OAuth text={"Sign in with Google"} />
           <Apple />

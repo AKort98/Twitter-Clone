@@ -3,7 +3,7 @@ import { BiComment, BiHeart, BiRepost } from "react-icons/bi";
 import { BsEye } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-function Post({ posts }) {
+function Post({ post }) {
   const time = (timestamp) => {
     const dateofTweet = new Date(timestamp);
     const currentTimestamp = new Date(); // Current time
@@ -31,58 +31,54 @@ function Post({ posts }) {
   };
 
   return (
-    <div className="flex flex-col">
-      {posts.map((tweet) => (
-        <Link
-          to={`/post/${tweet._id}`}
-          className="flex gap-3 border-b-[1px] p-4 box-border border-b-gray-600 hover:bg-[#111111af] cursor-pointer"
-          key={tweet._id}
-        >
-          <img
-            src={tweet.userRef.avatar || randomavatar()}
-            alt=""
-            className="rounded-full size-9"
-          />
-          <div className="flex flex-col w-full">
-            <div className="flex items-baseline gap-2">
-              <span className="text-gray-200 font-extrabold capitalize text-lg">
-                {tweet.userRef.username}
-              </span>
-              <small className="text-gray-500 text-[15px]">
-                {time(tweet.createdAt)}
-              </small>
-            </div>
-            <span className="text-gray-200">{tweet.text}</span>
-            <div className="text-gray-400 flex items-center justify-between mt-2 ">
-              <div className="flex items-center gap-1">
-                <span>
-                  <BiComment className="size-4" />
-                </span>
-                <small>52</small>
-              </div>
-              <div className="flex items-center gap-1 ">
-                <span>
-                  <BiRepost className="size-4" />
-                </span>
-                <small>52</small>
-              </div>
-              <div className="flex items-center gap-1 align-middle">
-                <span>
-                  <BiHeart className="size-4" />
-                </span>
-                <small>{tweet.likes}</small>
-              </div>
-              <div className="flex items-center gap-1 align-middle">
-                <span>
-                  <BsEye className="size-4" />
-                </span>
-                <small>{tweet.likes}</small>
-              </div>
-            </div>
+    <Link
+      to={`/post/${post._id}`}
+      className="flex gap-3 border-b-[1px] p-4 box-border border-b-gray-600 hover:bg-[#111111af] cursor-pointer"
+      key={post._id}
+    >
+      <img
+        src={post.userRef.avatar || randomavatar()}
+        alt=""
+        className="rounded-full size-9"
+      />
+      <div className="flex flex-col w-full">
+        <div className="flex items-baseline gap-2">
+          <span className="text-gray-200 font-extrabold capitalize text-lg">
+            {post.userRef.username}
+          </span>
+          <small className="text-gray-500 text-[15px]">
+            {time(post.createdAt)}
+          </small>
+        </div>
+        <span className="text-gray-200">{post.text}</span>
+        <div className="text-gray-400 flex items-center justify-between mt-2 ">
+          <div className="flex items-center gap-1">
+            <span>
+              <BiComment className="size-4" />
+            </span>
+            <small>52</small>
           </div>
-        </Link>
-      ))}
-    </div>
+          <div className="flex items-center gap-1 ">
+            <span>
+              <BiRepost className="size-4" />
+            </span>
+            <small>52</small>
+          </div>
+          <div className="flex items-center gap-1 align-middle">
+            <span>
+              <BiHeart className="size-4" />
+            </span>
+            <small>{post.likes}</small>
+          </div>
+          <div className="flex items-center gap-1 align-middle">
+            <span>
+              <BsEye className="size-4" />
+            </span>
+            <small>{post.likes}</small>
+          </div>
+        </div>
+      </div>
+    </Link>
   );
 }
 

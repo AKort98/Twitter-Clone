@@ -1,12 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import dotenv from "dotenv";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+
 const firebaseConfig = {
-    apiKey: process.env.APIKEY,
+    apiKey: 'AIzaSyBBLz0n2xbM9eGUJ0HJsm1s2Cw-qOqteA8',
     authDomain: "twitter-clone-481bb.firebaseapp.com",
     projectId: "twitter-clone-481bb",
     storageBucket: "twitter-clone-481bb.appspot.com",

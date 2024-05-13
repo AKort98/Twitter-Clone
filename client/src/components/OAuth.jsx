@@ -34,7 +34,7 @@ function OAuth({ text }) {
     }
   };
   return (
-    <div>
+    <>
       <button
         className="bg-white w-full rounded-2xl p-2 flex justify-center items-center gap-2 hover:opacity-90"
         onClick={handleGoogleLogin}
@@ -68,7 +68,7 @@ function OAuth({ text }) {
         </span>
         <span className="text-gray-600 font-semibold">{text}</span>
       </button>
-    </div>
+    </>
   );
 }
 
