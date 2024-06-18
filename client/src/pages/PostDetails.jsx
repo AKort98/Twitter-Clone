@@ -6,19 +6,24 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BiComment, BiHeart, BiRepost, BiSolidHeart } from "react-icons/bi";
 import { BsEye } from "react-icons/bs";
+import ReactLoading from "react-loading";
+
 function PostDetails() {
   const [post, setPost] = useState();
   const [comments, setComments] = useState([]);
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
+  const [loading, setLoading] = useState(false);
   const paramid = useParams("id");
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   console.log(currentUser);
   useEffect(() => {
     const PostDetails = async () => {
+      setLoading(true);
       const response = await fetch(`/api/posts/post/` + paramid.id);
       const data = await response.json();
+      setLoading(false);
       setPost(data);
     };
     PostDetails();
@@ -43,8 +48,9 @@ function PostDetails() {
 
     return hours + ":" + minutes + " - " + month + " " + day + ", " + year;
   };
+
   return (
-    <main className="sm:w-[580px] sm:mx-auto sm:border-l-[1px] border-l-gray-700 border-r-gray-700 sm:border-r-[1px]">
+    <main className="sm:w-1/2 sm:mx-auto sm:border-l-[1px] border-l-gray-700 border-r-gray-700 sm:border-r-[1px]">
       <div className="flex gap-7 items-center p-4">
         <Link to="/home">
           <span>
@@ -53,6 +59,13 @@ function PostDetails() {
         </Link>
         <span className="text-gray-200 font-extrabold text-xl">Post</span>
       </div>
+      {loading ? (
+        <div className="justify-center w-full flex">
+          <ReactLoading type="spinningBubbles" color="#1D9BF0" width={30} />
+        </div>
+      ) : (
+        ""
+      )}
       {post && (
         <div className="flex flex-col w-full  border-gray-700">
           <div className="mt-4 flex gap-2 items-center px-4 ">
@@ -105,25 +118,30 @@ function PostDetails() {
               <small>{post.likes}</small>
             </div>
           </div>
-          <div className="mt-2 flex gap-3 px-4">
-            <img
-              src={
-                currentUser.avatar ||
-                "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
-              }
-              alt=""
-              className="size-8 rounded-full"
-            />
-            <textarea
-              placeholder="Post your reply"
-              className="bg-transparent w-full text-gray-200 focus:outline-none placeholder-[#71767B] placeholder:font-semibold mt-1"
-            />
-          </div>
-          <div className="flex justify-end mt-2 border-b-[1px] border-gray-700 px-4">
-            <button className="text-white justify-end w-16 bg-blue-700 rounded-2xl mb-2 p-1">
-              Reply
-            </button>
-          </div>
+          {currentUser && (
+            <>
+              <div className="mt-2 flex gap-3 px-4">
+                <img
+                  src={
+                    currentUser.avatar ||
+                    "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+                  }
+                  alt=""
+                  className="size-8 rounded-full"
+                />
+                <textarea
+                  placeholder="Post your reply"
+                  className="bg-transparent w-full text-gray-200 focus:outline-none placeholder-[#71767B] placeholder:font-semibold mt-1"
+                />
+              </div>
+              <div className="flex justify-end mt-2 border-b-[1px] border-gray-700 px-4">
+                <button className="text-white justify-end w-16 bg-blue-700 rounded-2xl mb-2 p-1">
+                  Reply
+                </button>
+              </div>
+            </>
+          )}
+
           <div className="flex flex-col">
             {comments &&
               comments.map((comment) => (

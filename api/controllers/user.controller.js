@@ -102,4 +102,14 @@ export const updateUser = async (req, res) => {
 
 }
 
+export const getUserProfile = async (req, res, next) => {
+    const username = req.params.username;
+    try {
+        const user = await User.find({ username: username }).select('-password');
+        res.status(201).json(user);
+    } catch (error) {
+        next(error);
+    }
+}
+
 

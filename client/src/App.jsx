@@ -6,6 +6,8 @@ import Signin from "./components/Signin";
 import Feed from "./pages/Feed";
 import PostDetails from "./pages/PostDetails";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import User from "./pages/User";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   const queryClient = new QueryClient();
@@ -16,8 +18,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/sign-up" element={<CreateAccount />} />
           <Route path="/sign-in" element={<Signin />} />
+        </Routes>
+        <Sidebar />
+        <Routes>
           <Route path="/home" element={<Feed />} />
           <Route path="/post/:id" element={<PostDetails />} />
+          <Route path="/:username" element={<User />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

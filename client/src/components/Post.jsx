@@ -31,17 +31,19 @@ function Post({ post }) {
   };
 
   return (
-    <Link
+    <div
       to={`/post/${post._id}`}
       className="flex gap-3 border-b-[1px] p-4 box-border border-b-gray-600 hover:bg-[#111111af] cursor-pointer"
       key={post._id}
     >
-      <img
-        src={post.userRef.avatar || randomavatar()}
-        alt=""
-        className="rounded-full size-9"
-      />
-      <div className="flex flex-col w-full">
+      <Link to={`/${post.userRef.username}`}>
+        <img
+          src={post.userRef.avatar || randomavatar()}
+          alt=""
+          className="rounded-full size-9 hover:opacity-75"
+        />
+      </Link>
+      <Link to={`/post/${post._id}`} className="flex flex-col w-full">
         <div className="flex items-baseline gap-2">
           <span className="text-gray-200 font-extrabold capitalize text-lg">
             {post.userRef.username}
@@ -77,8 +79,8 @@ function Post({ post }) {
             <small>{post.likes}</small>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 

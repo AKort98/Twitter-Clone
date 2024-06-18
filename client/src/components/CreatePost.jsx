@@ -10,6 +10,7 @@ function CreatePost() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const queryClient = useQueryClient();
+  const [images, setImages] = useState([]);
 
   const handlePost = async () => {
     setLoading(true);
@@ -36,6 +37,10 @@ function CreatePost() {
     queryClient.invalidateQueries("posts");
   };
 
+  const handleUpload = () => {
+    document.querySelector("input[type=file]").click();
+  };
+
   return (
     <div className="text-white w-full p-4 flex flex-col gap-2 border-b-[1px] border-b-gray-700 ">
       <div className="flex items center gap-2">
@@ -56,7 +61,10 @@ function CreatePost() {
           />
           <div className="flex mt-6 items-end justify-between">
             <div className="flex gap-3 w-1/3 justify-between ">
-              <FaUpload className="text-blue-700 cursor-pointer" />
+              <button onClick={handleUpload}>
+                <FaUpload className="text-blue-700 cursor-pointer" />
+              </button>
+              <input type="file" className="hidden" />
               <GiFactory className="text-blue-700 cursor-pointer" />
               <BiPoll className="text-blue-700 cursor-pointer" />
               <FaUpload className="text-blue-700 cursor-pointer" />

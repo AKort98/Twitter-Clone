@@ -8,6 +8,7 @@ import LogoX from "../components/LogoX";
 import PostList from "../components/PostList";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
+import Sidebar from "../components/Sidebar";
 
 function Feed() {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -58,30 +59,34 @@ function Feed() {
           <BsGearFill className="text-white size-4 sm:hidden" />
         </header>
       )}
-      <main className="pb-12 sm:pb-0 sm:w-1/2 sm:mx-auto sm:border-l-[1px] border-l-gray-700 border-r-gray-700 sm:border-r-[1px]">
-        <div>
-          <ForYou />
-        </div>
-        <div className="hidden sm:inline">
-          <CreatePost />
-        </div>
-        {isLoading ? (
-          <div className="flex justify-center w-full p-5">
-            <ReactLoading type="spinningBubbles" color="#1D9BF0" width={30} />
+      <main className="md:flex justify-center ">
+        <div className="pb-12 sm:pb-0 md:border-l-[1px] border-l-gray-700 border-r-gray-700 sm:border-r-[1px] md:w-1/2 ">
+          <div>
+            <ForYou />
           </div>
-        ) : (
-          ""
-        )}
-        {queriedPosts && <PostList pages={queriedPosts.pages} />}
-        {isFetchingNextPage ? (
-          <div className="flex justify-center w-full p-5">
-            <ReactLoading type="spinningBubbles" color="#1D9BF0" width={30} />
+          <div className="hidden sm:block">
+            <CreatePost />
           </div>
-        ) : (
-          ""
-        )}
-        <div className="flex justify-center" ref={ref}></div>
+          {isLoading ? (
+            <div className="flex justify-center w-full p-5">
+              <ReactLoading type="spinningBubbles" color="#1D9BF0" width={30} />
+            </div>
+          ) : (
+            ""
+          )}
+          {queriedPosts && <PostList pages={queriedPosts.pages} />}
+          {isFetchingNextPage ? (
+            <div className="flex justify-center w-full p-5">
+              <ReactLoading type="spinningBubbles" color="#1D9BF0" width={30} />
+            </div>
+          ) : (
+            ""
+          )}
+          <div className="flex justify-center" ref={ref}></div>
+        </div>
+        <div className=""></div>
       </main>
+
       <Navbar />
     </>
   );
